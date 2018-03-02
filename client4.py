@@ -9,6 +9,10 @@ IP_address = '10.7.27.237'  # '10.7.24.67'#str(sys.argv[1])
 Port = 5000  # int(sys.argv[2])
 server.connect((IP_address, Port))
 
+print('Please enter your ID:')
+personname = input()
+server.send(personname)
+
 while True:
 
     # maintains a list of possible input streams
@@ -35,7 +39,7 @@ while True:
         else:
             message = sys.stdin.readline()
             server.send(str.encode(message))
-            sys.stdout.write("<You>")
+            sys.stdout.write(personname)
             sys.stdout.write(message)
             sys.stdout.flush()
 server.close()
