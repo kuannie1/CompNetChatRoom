@@ -16,7 +16,7 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 IP_address = '10.7.27.237'   # '10.7.24.67'#str(sys.argv[1])
 
 # takes second argument from command prompt as port number
-Port = 5000
+Port = 4003
 
 """
 binds the server to an entered IP address and at the
@@ -42,7 +42,7 @@ def clientthread(conn, addr, userID):
     while True:
             try:
                 message = conn.recv(2048)
-                if message:
+                if True:
 
                     """prints the message and address of the
                     user who just sent the message on the server

@@ -11,7 +11,7 @@ personname = input()
 
 
 IP_address = '10.7.27.237'  # '10.7.24.67'#str(sys.argv[1])
-Port = 5000  # int(sys.argv[2])
+Port = 4003  # int(sys.argv[2])
 server.connect((IP_address, Port))
 server.send(personname.encode('UTF-8'))
 
@@ -33,6 +33,7 @@ while True:
     for socks in read_sockets:
         if socks == server:
             message = socks.recv(2048)
+            print(len(message))
             if (len(message) != 0):
                 print(message.decode('UTF-8'))
             else:
@@ -41,7 +42,7 @@ while True:
         else:
             message = sys.stdin.readline()
             server.send(message.encode('UTF-8'))
-            personname2 = '<' + personname + '>'
+            personname2 = '< ' + personname + ' > '
             sys.stdout.write(personname2)
             sys.stdout.write(message)
             sys.stdout.flush()
