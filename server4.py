@@ -47,10 +47,10 @@ def clientthread(conn, addr):
                     """prints the message and address of the
                     user who just sent the message on the server
                     terminal"""
-                    print("<" + addr[0] + "> " + message)
+                    print("<" + addr[1] + "> " + message)
 
                     # Calls broadcast function to send message to all
-                    message_to_send = "<" + addr[0] + "> " + message
+                    message_to_send = "<" + addr[1] + "> " + message
                     broadcast(message_to_send, conn)
 
                 else:
@@ -96,13 +96,14 @@ while True:
     which contains the IP address of the client that just
     connected"""
     conn, addr = server.accept()
+    addr[1] = conn.recieve(2048)
 
     """Maintains a list of clients for ease of broadcasting
     a message to all available people in the chatroom"""
     list_of_clients.append(conn)
 
     # prints the address of the user that just connected
-    print(addr[0] + " connected")
+    print(addr[1] + " connected")
 
     # creates and individual thread for every user
     # that connects
