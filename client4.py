@@ -13,7 +13,7 @@ personname = input()
 IP_address = '10.7.27.237'  # '10.7.24.67'#str(sys.argv[1])
 Port = 5000  # int(sys.argv[2])
 server.connect((IP_address, Port))
-server.send(personname)
+server.send(personname.encode('UTF-8'))
 
 while True:
 
@@ -34,14 +34,15 @@ while True:
         if socks == server:
             message = socks.recv(2048)
             if (len(message) != 0):
-                print(message)
+                print(message.decode('UTF-8'))
             else:
-                sys.stdout.write("\nServer Down\n")
+                sys.stdout.write("Server Down")
                 sys.exit()
         else:
             message = sys.stdin.readline()
-            server.send(str.encode(message))
-            sys.stdout.write(personname)
+            server.send(message.encode('UTF-8'))
+            personname2 = '<' + personname + '>'
+            sys.stdout.write(personname2)
             sys.stdout.write(message)
             sys.stdout.flush()
 server.close()
