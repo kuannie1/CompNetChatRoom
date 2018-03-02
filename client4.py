@@ -5,12 +5,14 @@ import sys
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-IP_address = '10.7.27.237'  # '10.7.24.67'#str(sys.argv[1])
-Port = 5000  # int(sys.argv[2])
-server.connect((IP_address, Port))
 
 print('Please enter your ID:')
 personname = input()
+
+
+IP_address = '10.7.27.237'  # '10.7.24.67'#str(sys.argv[1])
+Port = 5000  # int(sys.argv[2])
+server.connect((IP_address, Port))
 server.send(personname)
 
 while True:
