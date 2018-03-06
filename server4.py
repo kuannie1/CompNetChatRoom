@@ -3,6 +3,7 @@ import socket
 import select
 import sys
 from _thread import *
+import random
 
 """The first argument AF_INET is the address domain of the
 socket. This is used when we have an Internet Domain with
@@ -13,10 +14,13 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 
-IP_address = '10.7.27.237'   # '10.7.24.67'#str(sys.argv[1])
+# IP_address = '10.7.28.116'   # '10.7.24.67'#str(sys.argv[1])
+IP_address = '127.0.0.1'
 
 # takes second argument from command prompt as port number
-Port = 4003
+# Port = 5432
+
+Port = 5432
 
 """
 binds the server to an entered IP address and at the
@@ -24,6 +28,7 @@ specified port number.
 The client must be aware of these parameters
 """
 server.bind((IP_address, Port))
+Porttosend = server.getsockname()
 
 """
 listens for 100 active connections. This number can be
