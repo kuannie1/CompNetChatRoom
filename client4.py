@@ -13,7 +13,7 @@ def chat_client():
     print('Please enter your ID:')
     personname = input()
 
-    IP_address = '127.0.0.1'  # '10.7.24.67'#str(sys.argv[1])
+    IP_address = 'REPLACETHIS'  # '10.7.24.67'#str(sys.argv[1])
     Port = 5432  # int(sys.argv[2
     try:
         server.connect((IP_address, Port))
@@ -48,7 +48,7 @@ def chat_client():
                     print(message.decode('UTF-8'))
                 else:
                     # there's no connection
-                    sys.stdout.write("Server Down")
+                    sys.stdout.write("Server Down\n")
                     sys.exit()
             else:
                 # user entered a message

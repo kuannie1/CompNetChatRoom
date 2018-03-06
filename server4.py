@@ -4,6 +4,7 @@ import select
 import sys
 from _thread import *
 import random
+import pickle, pprint
 
 """The first argument AF_INET is the address domain of the
 socket. This is used when we have an Internet Domain with
@@ -15,7 +16,7 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 
 # IP_address = '10.7.28.116'   # '10.7.24.67'#str(sys.argv[1])
-IP_address = '127.0.0.1'
+IP_address = 'REPLACETHIS'
 
 # takes second argument from command prompt as port number
 # Port = 5432
@@ -38,6 +39,22 @@ server.listen(100)
 
 list_of_clients = []
 
+messages = []
+
+
+
+
+def write_to_file(data, filename):
+    output = open(filename, 'wb')
+    pickle.dump(data, output)
+    output.close()
+
+def read_file(filename):
+    with open(filename, 'rb') as f:
+        content = pickle.load(f)
+    return messages
+
+write_to_file(messages, 'data.pkl')
 
 def clientthread(conn, addr, userID):
 
@@ -47,16 +64,20 @@ def clientthread(conn, addr, userID):
     while True:
             try:
                 message = conn.recv(2048)
+                
                 if True:
 
                     """prints the message and address of the
                     user who just sent the message on the server
                     terminal"""
-                    # print(str.decode(userID))
                     print('<', userID.decode('UTF-8'), '>', message.decode('UTF-8'))
 
                     # Calls broadcast function to send message to all
-                    message_to_send = "<" + userID.decode('UTF-8') + "> " + message
+                    message_to_send = "<" + userID.decode('UTF-8') + "> " + message.decode('UTF-8')
+
+                    messages.append(message_to_send)
+                    write_to_file(messages, 'data.pkl')
+
                     broadcast(message_to_send.encode('UTF-8'), conn)
 
                 else:
