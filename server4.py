@@ -16,12 +16,12 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 
 # IP_address = '10.7.28.116'   # '10.7.24.67'#str(sys.argv[1])
-IP_address = 'REPLACETHIS'
+IP_address = '10.7.92.32'
 
 # takes second argument from command prompt as port number
 # Port = 5432
 
-Port = 5432
+Port = random.randint(2**14 + 2**15, 2**16)
 
 """
 binds the server to an entered IP address and at the
@@ -30,6 +30,7 @@ The client must be aware of these parameters
 """
 server.bind((IP_address, Port))
 Porttosend = server.getsockname()
+print(Porttosend)
 
 """
 listens for 100 active connections. This number can be
@@ -65,7 +66,7 @@ def clientthread(conn, addr, userID):
             try:
                 message = conn.recv(2048)
                 
-                if True:
+                if (len(message)>0):
 
                     """prints the message and address of the
                     user who just sent the message on the server

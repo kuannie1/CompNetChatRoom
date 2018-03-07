@@ -2,7 +2,7 @@
 import socket
 import select
 import sys
-
+import time
 
 def chat_client():
 
@@ -10,17 +10,21 @@ def chat_client():
     # Port = int(sys.argv[2])
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
+    IP_address = '10.7.92.32'  
+    
+    for i in range(2**14 + 2**15, 2**16):
+        try:
+            time.sleep(0.000001)
+            server.connect((IP_address, i))
+            break
+        except:
+            pass
+            # sys.exit()
+    
     print('Please enter your ID:')
     personname = input()
-
-    IP_address = 'REPLACETHIS'  # '10.7.24.67'#str(sys.argv[1])
-    Port = 5432  # int(sys.argv[2
-    try:
-        server.connect((IP_address, Port))
-
-    except:
-        print('Unable to connect')
-        sys.exit()
 
     server.send(personname.encode('UTF-8'))
     print('Connected to server as ' + personname + '! Start writing your msg')
@@ -28,7 +32,7 @@ def chat_client():
 
     while True:
 
-            # maintains a list of possible input streams
+        # maintains a list of possible input streams
         sockets_list = [sys.stdin, server]
         """ There are two possible input situations. Either the
         user wants to give  manual input to send to
