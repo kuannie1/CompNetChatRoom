@@ -13,7 +13,7 @@ def chat_client():
     print('Please enter your ID:')
     personname = input()
 
-    IP_address = 'REPLACETHIS'  # '10.7.24.67'#str(sys.argv[1])
+    IP_address = '127.0.0.1'  # '10.7.24.67'#str(sys.argv[1])
     Port = 5432  # int(sys.argv[2
     try:
         server.connect((IP_address, Port))
@@ -44,7 +44,7 @@ def chat_client():
             if socks == server:
                 # incoming message from the server
                 message = socks.recv(2048)
-                if (len(message) != 0):
+                if (len(message.decode('UTF-8')) != 0):
                     print(message.decode('UTF-8'))
                 else:
                     # there's no connection
